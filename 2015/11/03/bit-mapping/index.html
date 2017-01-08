@@ -1,0 +1,453 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>算法--位图法 | Peng`s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Peng">
+    
+
+    
+    <meta name="description" content="1-n个整数，里面缺少了（打个比方）3个数字，请找出其中缺失的3个数字.
+1234567891011121314151617var n = 10,m = 3,i,      arr = [2,5,1,8,6,9,4],    //缺失的数据源      ret = new Array(11),      result = [];for(i = 0;i&amp;lt;n-m;i++)&amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法--位图法">
+<meta property="og:url" content="http://yoursite.com/2015/11/03/bit-mapping/index.html">
+<meta property="og:site_name" content="Peng`s Blog">
+<meta property="og:description" content="1-n个整数，里面缺少了（打个比方）3个数字，请找出其中缺失的3个数字.
+1234567891011121314151617var n = 10,m = 3,i,      arr = [2,5,1,8,6,9,4],    //缺失的数据源      ret = new Array(11),      result = [];for(i = 0;i&amp;lt;n-m;i++)&amp;#123;">
+<meta property="og:updated_time" content="2017-01-08T14:33:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法--位图法">
+<meta name="twitter:description" content="1-n个整数，里面缺少了（打个比方）3个数字，请找出其中缺失的3个数字.
+1234567891011121314151617var n = 10,m = 3,i,      arr = [2,5,1,8,6,9,4],    //缺失的数据源      ret = new Array(11),      result = [];for(i = 0;i&amp;lt;n-m;i++)&amp;#123;">
+<link rel="publisher" href="117810512905299243903">
+
+    
+    
+    <link rel="icon" href="/img/favicon_1.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/head.jpg" alt="Peng`s Blog" title="Peng`s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Peng`s Blog">Peng`s Blog</a></h1>
+				<h2 class="blog-motto">Life &amp; Code</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/algorithm/" title="algorithm">algorithm<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/YDKJS/" title="YDKJS">YDKJS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/03/bit-mapping/" title="算法--位图法" itemprop="url">算法--位图法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-03T14:21:34.000Z" itemprop="datePublished"> 发表于 2015-11-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>1-n个整数，里面缺少了（打个比方）3个数字，请找出其中缺失的3个数字.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> n = <span class="number">10</span>,m = <span class="number">3</span>,i,</div><div class="line">      arr = [<span class="number">2</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">4</span>],    <span class="comment">//缺失的数据源</span></div><div class="line">      ret = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">11</span>),</div><div class="line">      result = [];</div><div class="line"><span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;n-m;i++)&#123;</div><div class="line">      ret[arr[i]] = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(ret);        </div><div class="line"><span class="comment">//[undefined × 1, 1, 1, undefined × 1, 1, 1, 1, undefined × 1, 1, 1, undefined × 1] </span></div><div class="line"></div><div class="line"><span class="keyword">for</span>(i = <span class="number">0</span>,len = ret.length;i&lt;len;i++)&#123;</div><div class="line">     !ret[i] &amp;&amp; result.push(i);</div><div class="line">&#125;</div><div class="line">result.shift(<span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(result);       <span class="comment">//[3,7,10]</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>这里位图法，适合1-n个整数间无重复出现，然后利用数组索引的无重复序列号进行对比，找出索引中值不等于1的就是缺失的数字。</p>
+<p>此方法简洁且运行相当高效。</p>
+<p>由此问题其实可以引出一个题目~!!!!!</p>
+<p>在1-n个整数间，随机生成K个<strong>不同的</strong>整数。</p>
+<p>这里给个算法～！<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">18</span>,<span class="number">19</span>],n = <span class="number">20</span>,ret = [],k =<span class="number">5</span>,j,i;</div><div class="line"><span class="keyword">for</span>(j = <span class="number">0</span>; j&lt;k; j++)&#123;</div><div class="line">    i = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*arr.length);   <span class="comment">//生成0-19的随机数,这里主要用来对应数组索引</span></div><div class="line">    ret.push(arr[i]);</div><div class="line">    arr.splice(i,<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(ret);    <span class="comment">//[8, 4, 14, 18, 9]</span></div></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/algorithm/">algorithm</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/11/03/bit-mapping/" data-title="算法--位图法 | Peng`s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/04/anagrams/" title="算法--变位词">
+  <strong>上一篇：</strong><br/>
+  <span>
+  算法--变位词</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/10/28/My-New-Home/"  title="Welcome">
+ <strong>下一篇：</strong><br/> 
+ <span>Welcome
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+        <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/huiop368" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://plus.google.com/117810512905299243903?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:negativemh@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Peng">Peng</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('aside-min')
+    setTimeout(function(){
+        a.css('display', 'none');
+        o.css('display', 'block');
+    }, 5e2);
+  });
+  o.click(function(){
+    o.css('display', 'none');
+    a.css('display', 'block');
+    setTimeout(function(){
+     a.removeClass('aside-min');
+    }, 10);
+  });
+    /*
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+    */
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+    /*
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+    */
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+

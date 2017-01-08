@@ -1,0 +1,517 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>YDKJS--Types &amp; Grammar(译) | Peng`s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Peng">
+    
+
+    
+    <meta name="description" content="第一章:类型大多数开发者都会说一门动态语言是没有类型的。让我们看看ES5.1里面是怎么描述这个话题的。
+如果你是强类型语言的忠实粉丝的话，你也许会反对type这个词的用法, 在这些语言里type更加意味着全部,对JS而言。
+有些人说JS没有权利拥有type, 而应该被替代为tags或者subTypes
+呸！我们将引用一个粗糙的定义: 类型是一种内在的特性，这个特性是一个值行为的唯一标识, 并且与其">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YDKJS--Types & Grammar(译)">
+<meta property="og:url" content="http://yoursite.com/2015/11/16/ydkjs-types-grammar-ch1/index.html">
+<meta property="og:site_name" content="Peng`s Blog">
+<meta property="og:description" content="第一章:类型大多数开发者都会说一门动态语言是没有类型的。让我们看看ES5.1里面是怎么描述这个话题的。
+如果你是强类型语言的忠实粉丝的话，你也许会反对type这个词的用法, 在这些语言里type更加意味着全部,对JS而言。
+有些人说JS没有权利拥有type, 而应该被替代为tags或者subTypes
+呸！我们将引用一个粗糙的定义: 类型是一种内在的特性，这个特性是一个值行为的唯一标识, 并且与其">
+<meta property="og:updated_time" content="2017-01-08T14:46:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YDKJS--Types & Grammar(译)">
+<meta name="twitter:description" content="第一章:类型大多数开发者都会说一门动态语言是没有类型的。让我们看看ES5.1里面是怎么描述这个话题的。
+如果你是强类型语言的忠实粉丝的话，你也许会反对type这个词的用法, 在这些语言里type更加意味着全部,对JS而言。
+有些人说JS没有权利拥有type, 而应该被替代为tags或者subTypes
+呸！我们将引用一个粗糙的定义: 类型是一种内在的特性，这个特性是一个值行为的唯一标识, 并且与其">
+<link rel="publisher" href="117810512905299243903">
+
+    
+    
+    <link rel="icon" href="/img/favicon_1.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/head.jpg" alt="Peng`s Blog" title="Peng`s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Peng`s Blog">Peng`s Blog</a></h1>
+				<h2 class="blog-motto">Life &amp; Code</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章-类型"><span class="toc-number">1.</span> <span class="toc-text">第一章:类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内置类型"><span class="toc-number">1.1.</span> <span class="toc-text">内置类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#值-amp-类型"><span class="toc-number">1.2.</span> <span class="toc-text">值&类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined-vs-“undeclared”"><span class="toc-number">1.3.</span> <span class="toc-text">undefined vs “undeclared”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof-Undeclared"><span class="toc-number">1.4.</span> <span class="toc-text">typeof Undeclared</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/algorithm/" title="algorithm">algorithm<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/YDKJS/" title="YDKJS">YDKJS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/16/ydkjs-types-grammar-ch1/" title="YDKJS--Types &amp; Grammar(译)" itemprop="url">YDKJS--Types &amp; Grammar(译)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-16T14:37:15.000Z" itemprop="datePublished"> 发表于 2015-11-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章-类型"><span class="toc-number">1.</span> <span class="toc-text">第一章:类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内置类型"><span class="toc-number">1.1.</span> <span class="toc-text">内置类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#值-amp-类型"><span class="toc-number">1.2.</span> <span class="toc-text">值&类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined-vs-“undeclared”"><span class="toc-number">1.3.</span> <span class="toc-text">undefined vs “undeclared”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof-Undeclared"><span class="toc-number">1.4.</span> <span class="toc-text">typeof Undeclared</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="第一章-类型"><a href="#第一章-类型" class="headerlink" title="第一章:类型"></a>第一章:类型</h2><p>大多数开发者都会说一门动态语言是没有类型的。让我们看看ES5.1里面是怎么描述这个话题的。</p>
+<p>如果你是强类型语言的忠实粉丝的话，你也许会反对type这个词的用法, 在这些语言里type更加意味着全部,对JS而言。</p>
+<p>有些人说JS没有权利拥有type, 而应该被替代为tags或者subTypes</p>
+<p>呸！我们将引用一个粗糙的定义: 类型是一种内在的特性，这个特性是一个值行为的唯一标识, 并且与其他值区分开来。</p>
+<p>换句话来说，就是如果解释器和开发者都区别对待42和‘42’, 那么这两个值就拥有不同的类型–number和string。</p>
+<h3 id="内置类型"><a href="#内置类型" class="headerlink" title="内置类型"></a>内置类型</h3><p>Javascript 定义了7种内置类型:</p>
+<ul>
+<li><code>null</code></li>
+<li><code>undefined</code></li>
+<li><code>boolean</code></li>
+<li><code>number</code></li>
+<li><code>string</code></li>
+<li><code>object</code></li>
+<li><code>symbol</code> – added in ES6!</li>
+</ul>
+<p><strong>Note:</strong> 除了object类型外，其他类型都称为原始类型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>     === <span class="string">"undefined"</span>; <span class="comment">// true</span></div><div class="line"><span class="keyword">typeof</span> <span class="literal">true</span>          === <span class="string">"boolean"</span>;   <span class="comment">// true</span></div><div class="line"><span class="keyword">typeof</span> <span class="number">42</span>            === <span class="string">"number"</span>;    <span class="comment">// true</span></div><div class="line"><span class="keyword">typeof</span> <span class="string">"42"</span>          === <span class="string">"string"</span>;    <span class="comment">// true</span></div><div class="line"><span class="keyword">typeof</span> &#123; <span class="attr">life</span>: <span class="number">42</span> &#125;  === <span class="string">"object"</span>;    <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="comment">// added in ES6!</span></div><div class="line"><span class="keyword">typeof</span> <span class="built_in">Symbol</span>()      === <span class="string">"symbol"</span>;    <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>这里列出来的6个值都拥有相符的类型，返回相同名字的字符串值。<br><code>Symbol</code>是一种在ES6里的新类型，将会在Chapter3里覆盖到。</p>
+<p>也许你注意到了， 这里将null移除在列表外了，因为null是一个特殊情况。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tyoeof <span class="literal">null</span> === <span class="string">"object"</span>;  <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>如果返回的是<code>&quot;null&quot;</code>, 也许会更好。但是这个原始的bug已经在JS里存在了20多年，而且是不会被修复的，因为有太多的现存的网站依赖于这个“BUG”,修复它的话只会带来跟多的bug。</p>
+<p>如果你想测试<code>null</code>的类型，你需要一个复合条件:</p>
+<a id="more"></a>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="literal">null</span>;</div><div class="line"></div><div class="line">(!a &amp;&amp; <span class="string">"object"</span> === <span class="keyword">typeof</span> a);  <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>那么第7个<code>typeof</code>返回的字符串是？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123; <span class="comment">/* .. */</span>&#125; === <span class="string">"function"</span>; <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>这就很容易的让人想到在JS里<code>function</code>是第一型的，尤其是通过<code>typeof</code>这个行为。<br>经管如此，如果仔细分析，你会发现其实它是<code>object</code>的子类型。具体来说，<code>function</code>是一种可执行的对象，内部拥有<code>[[Call]]</code>属性，允许被执行。</p>
+<p>事实上function作为对象来处理是非常有用的。 最重要的一点是，它可以拥有属性。 例如:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"> b, c </span>)</span>&#123;</div><div class="line">    <span class="comment">/* .. */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个function对象有一个<code>length</code>属性， 它所拥有的形参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a.length;  <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>因为你定义了两个形参(<code>b</code> and <code>a</code>), 所以function的length属性值是<code>2</code>.</p>
+<p>那么数组又是什么呢？ 他们也是特别的类型吗?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] === <span class="string">"object"</span>; <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>仅仅是对象，但是你也可以把它当做是object的子类型(see Chapter 3).</p>
+<h3 id="值-amp-类型"><a href="#值-amp-类型" class="headerlink" title="值&amp;类型"></a>值&amp;类型</h3><p>在Javascript里，变量(variables)是没有类型的 — <strong>值有类型</strong>。变量能够持有任何类型的值在任何时候。<br>在JS中是没有强制类型的，一个变量在一种状态中可以持有<code>string</code>, 下一个就可能持有<code>number</code>。</p>
+<p>值<code>42</code>有它本身的类型<code>number</code>, 并且它的类型是不能改变。像<code>&quot;42&quot;</code>字符串类型，可以通过类型转换(coercion)，由数字类型<code>42</code>转换得到。</p>
+<p>如果你用<code>typeof</code>作用于一个变量，它不会问”这个变量是什么类型?”, 因为变量是没有类型的在JS里。 它应该是问”在变量里的这个值是什么类型?”</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">42</span>;</div><div class="line"><span class="keyword">typeof</span> a; <span class="comment">// "number"</span></div><div class="line"></div><div class="line">a = <span class="literal">true</span>;</div><div class="line"><span class="keyword">typeof</span> a; <span class="comment">// "boolean"</span></div></pre></td></tr></table></figure>
+<p><code>typeof</code>操作符永远都返回一个字符串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> <span class="keyword">typeof</span> <span class="number">42</span>; <span class="comment">// "string"</span></div></pre></td></tr></table></figure>
+<h3 id="undefined-vs-“undeclared”"><a href="#undefined-vs-“undeclared”" class="headerlink" title="undefined vs “undeclared”"></a>undefined vs “undeclared”</h3><p>变量可以没有值，但事实上这时候它的值是<code>undefined</code>. 对这种变量执行<code>typeof</code>时将得到<code>&quot;undefined&quot;</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a;</div><div class="line"></div><div class="line"><span class="keyword">typeof</span> a; <span class="comment">// "undefined"</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> b = <span class="number">42</span>;</div><div class="line"><span class="keyword">var</span> c;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// later</span></div><div class="line">b = c;</div><div class="line"></div><div class="line"><span class="keyword">typeof</span> b; <span class="comment">// "undefined"</span></div><div class="line"><span class="keyword">typeof</span> c; <span class="comment">// "undefined"</span></div></pre></td></tr></table></figure>
+<p>对于大多数开发者来说”undefined”和”undeclared”是同义词, 尽管如此在JS中，他们是两个完全不同的概念。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a;</div><div class="line"></div><div class="line">a; <span class="comment">// undefined</span></div><div class="line">b; <span class="comment">// ReferenceError: b is not defined</span></div></pre></td></tr></table></figure>
+<p>就像你看到得一样，”b is not defined”会让人非常容易的与”b is undefined”混淆。再重复一遍，”undefined”与”is not defined”是完全不同的概念。如果浏览器可以说”b is not found”或者”b is not declared”,也许是可以减少疑惑的。</p>
+<p>这里还有一个与<code>typeof</code>相关的容易产生困惑的行为。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a;</div><div class="line"></div><div class="line"><span class="keyword">typeof</span> a; <span class="comment">// "undefined"</span></div><div class="line"><span class="keyword">typeof</span> b; <span class="comment">// "undefined"</span></div></pre></td></tr></table></figure>
+<p><code>typeof</code>都会返回<code>&quot;undefined&quot;</code>, 即使是”undeclared”(为声明)的变量。注意这里是不会报错的，当我们执行<code>typeof b</code>的时候。这是<code>typeof</code>的一种特别的保护措施。</p>
+<p>就像上面提到的null类似，如果<code>typeof</code>未声明的变量，返回”undeclared”可能会更有帮助。</p>
+<h3 id="typeof-Undeclared"><a href="#typeof-Undeclared" class="headerlink" title="typeof Undeclared"></a><code>typeof</code> Undeclared</h3><p>尽管如此，对于浏览器端的JS来说这个保护措施是比较有用的，因为JS文件加载进来的变量是共享global这个命名空间的。</p>
+<p>举个简单的例子，想象一下在你的环境中又个”debug”模式，它被一个全局变量<code>DEBUG</code>控制着。<br>在一个”debug.js”文件里包含了一个全局变量<code>var DEBUG = true</code>, 这个文件只会在开发环境中，不会在线上环境。</p>
+<p>然而，你必须关心怎么判断<code>DEBUG</code>这个变量是否存在。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// oops, this would throw an error!</span></div><div class="line"><span class="keyword">if</span> (DEBUG) &#123;</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">"Debugging is starting"</span> );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// this is a safe existence check</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> DEBUG !== <span class="string">"undefined"</span>) &#123;</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">"Debugging is starting"</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种检查不仅仅对这种变量有用，如果你在检查一个内置的API，你也许会发现这很有用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( <span class="keyword">typeof</span> atob === <span class="string">"undefined"</span> ) &#123;</div><div class="line">    atob = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">/*..*/</span> &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有一种方法不需要用<code>typeof</code>去检查变量，在浏览器里面所有的全局变量也是<code>global</code>的属性，所以上面的检验也能像下面这样执行:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.DEBUG) &#123;</div><div class="line">    <span class="comment">// ..</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!<span class="built_in">window</span>.atob) &#123;</div><div class="line">    <span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不像未声明的变量那样会抛出异常，如果你访问一个<code>window</code>不存在的属性是不会报错的。</p>
+<p>另一方面,手动的设置全局变量为<code>window</code>的引用是我们应当尽量避免的，特别是当你的代码需要运行在多种JS环境中(不仅仅是浏览器，也可以是node环境),这个时候global就不一定是<code>window</code>了。</p>
+<p>我们想象一个公共函数，你想其他人可以黏贴到他们的代码中去，这个时候你会想要检查这个方法是否已经被定义过了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomethingCool</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> helper =</div><div class="line">        (<span class="keyword">typeof</span> FeatureXYZ !== <span class="string">"undefined"</span>) ?</div><div class="line">        FeatureXYZ :</div><div class="line">        <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">/*.. default feature ..*/</span> &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> val = helper();</div><div class="line">    <span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>doSomethingCool()</code>检查了一个叫<code>FeatureXYZ</code>的方法，如果找到了就用找到的，如果没有找到，就用它自己的。现在，如果有人把这个函数引用到他的模块中, 对于他们的模块定义或者没定义<code>FeatureXYZ</code>都是安全的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// an IIFE (see "Immediately Invoked Function Expressions"</span></div><div class="line"><span class="comment">// discussion in the *Scope &amp; Closures* title of this series)</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">FeatureXYZ</span>(<span class="params"></span>) </span>&#123; <span class="comment">/*.. my XYZ feature ..*/</span> &#125;</div><div class="line"></div><div class="line">    <span class="comment">// include `doSomethingCool(..)`</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">doSomethingCool</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> helper =</div><div class="line">            (<span class="keyword">typeof</span> FeatureXYZ !== <span class="string">"undefined"</span>) ?</div><div class="line">            FeatureXYZ :</div><div class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">/*.. default feature ..*/</span> &#125;;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> val = helper();</div><div class="line">        <span class="comment">// ..</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    doSomethingCool();</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>一些开发者可能会比较喜欢一种设计模式叫”依赖注入”, 这里就是将<code>FeatureXYZ</code>在外面定义，替换为依赖参数传入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomethingCool</span>(<span class="params">FeatureXYZ</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> helper = FeatureXYZ ||</div><div class="line">        <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">/*.. default feature ..*/</span> &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> val = helper();</div><div class="line">    <span class="comment">// ..</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/YDKJS/">YDKJS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/11/16/ydkjs-types-grammar-ch1/" data-title="YDKJS--Types &amp; Grammar(译) | Peng`s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/29/ydkjs-types-grammar-ch2/" title="YDKJS--Types &amp; Grammar(译)">
+  <strong>上一篇：</strong><br/>
+  <span>
+  YDKJS--Types &amp; Grammar(译)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/04/analysis/"  title="算法--设计分析">
+ <strong>下一篇：</strong><br/> 
+ <span>算法--设计分析
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+        <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/huiop368" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://plus.google.com/117810512905299243903?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:negativemh@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Peng">Peng</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('aside-min')
+    setTimeout(function(){
+        a.css('display', 'none');
+        o.css('display', 'block');
+    }, 5e2);
+  });
+  o.click(function(){
+    o.css('display', 'none');
+    a.css('display', 'block');
+    setTimeout(function(){
+     a.removeClass('aside-min');
+    }, 10);
+  });
+    /*
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+    */
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+    /*
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+    */
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+

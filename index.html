@@ -1,0 +1,760 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Peng`s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Peng">
+    
+
+    
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Peng`s Blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Peng`s Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Peng`s Blog">
+<link rel="publisher" href="117810512905299243903">
+
+    
+    
+    <link rel="icon" href="/img/favicon_1.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/head.jpg" alt="Peng`s Blog" title="Peng`s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Peng`s Blog">Peng`s Blog</a></h1>
+				<h2 class="blog-motto">Life &amp; Code</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/algorithm/" title="algorithm">algorithm<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/YDKJS/" title="YDKJS">YDKJS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/23/redux-source-code-analysis/" title="Redux 源码分析(1)" itemprop="url">Redux 源码分析(1)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2016-05-23T15:13:59.000Z" itemprop="datePublished"> 发表于 2016-05-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="Placeholder"><a href="#Placeholder" class="headerlink" title="Placeholder"></a>Placeholder</h2>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/redux/">redux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/29/ydkjs-types-grammar-ch2/" title="YDKJS--Types &amp; Grammar(译)" itemprop="url">YDKJS--Types &amp; Grammar(译)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-29T13:25:42.000Z" itemprop="datePublished"> 发表于 2015-11-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="第二章-值"><a href="#第二章-值" class="headerlink" title="第二章:值"></a>第二章:值</h2><p>数组，字符串和数字是任何语言最基本的类型，但是Javascript有一些不同的性质也许会使你又爱又恨。</p>
+<p>让我们来看几个内置的JS类型，探索一些怎样能够跟好的正确理解他们的行为。</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>与其他强类型语言相比，Javascript的<code>arrays</code>可以包含任意类型的值，无论是字符串，数字，对象，甚至是数组本身。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [ <span class="number">1</span>, <span class="string">"2"</span>, [<span class="number">3</span>] ];</div><div class="line"></div><div class="line">a.length;       <span class="comment">// 3</span></div><div class="line">a[<span class="number">0</span>] === <span class="number">1</span>;     <span class="comment">// true</span></div><div class="line">a[<span class="number">2</span>][<span class="number">0</span>] === <span class="number">3</span>;  <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>你不需要预先设置数组的size, 你可以仅仅声明他们并且增加值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [ ];</div><div class="line"></div><div class="line">a.length;   <span class="comment">// 0</span></div><div class="line"></div><div class="line">a[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">a[<span class="number">1</span>] = <span class="string">"2"</span>;</div><div class="line">a[<span class="number">2</span>] = [ <span class="number">3</span> ];</div><div class="line"></div><div class="line">a.length;   <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/11/29/ydkjs-types-grammar-ch2/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/YDKJS/">YDKJS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/16/ydkjs-types-grammar-ch1/" title="YDKJS--Types &amp; Grammar(译)" itemprop="url">YDKJS--Types &amp; Grammar(译)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-16T14:37:15.000Z" itemprop="datePublished"> 发表于 2015-11-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="第一章-类型"><a href="#第一章-类型" class="headerlink" title="第一章:类型"></a>第一章:类型</h2><p>大多数开发者都会说一门动态语言是没有类型的。让我们看看ES5.1里面是怎么描述这个话题的。</p>
+<p>如果你是强类型语言的忠实粉丝的话，你也许会反对type这个词的用法, 在这些语言里type更加意味着全部,对JS而言。</p>
+<p>有些人说JS没有权利拥有type, 而应该被替代为tags或者subTypes</p>
+<p>呸！我们将引用一个粗糙的定义: 类型是一种内在的特性，这个特性是一个值行为的唯一标识, 并且与其他值区分开来。</p>
+<p>换句话来说，就是如果解释器和开发者都区别对待42和‘42’, 那么这两个值就拥有不同的类型–number和string。</p>
+<h3 id="内置类型"><a href="#内置类型" class="headerlink" title="内置类型"></a>内置类型</h3><p>Javascript 定义了7种内置类型:</p>
+<ul>
+<li><code>null</code></li>
+<li><code>undefined</code></li>
+<li><code>boolean</code></li>
+<li><code>number</code></li>
+<li><code>string</code></li>
+<li><code>object</code></li>
+<li><code>symbol</code> – added in ES6!</li>
+</ul>
+<p><strong>Note:</strong> 除了object类型外，其他类型都称为原始类型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>     === <span class="string">"undefined"</span>; <span class="comment">// true</span></div><div class="line"><span class="keyword">typeof</span> <span class="literal">true</span>          === <span class="string">"boolean"</span>;   <span class="comment">// true</span></div><div class="line"><span class="keyword">typeof</span> <span class="number">42</span>            === <span class="string">"number"</span>;    <span class="comment">// true</span></div><div class="line"><span class="keyword">typeof</span> <span class="string">"42"</span>          === <span class="string">"string"</span>;    <span class="comment">// true</span></div><div class="line"><span class="keyword">typeof</span> &#123; <span class="attr">life</span>: <span class="number">42</span> &#125;  === <span class="string">"object"</span>;    <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="comment">// added in ES6!</span></div><div class="line"><span class="keyword">typeof</span> <span class="built_in">Symbol</span>()      === <span class="string">"symbol"</span>;    <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>这里列出来的6个值都拥有相符的类型，返回相同名字的字符串值。<br><code>Symbol</code>是一种在ES6里的新类型，将会在Chapter3里覆盖到。</p>
+<p>也许你注意到了， 这里将null移除在列表外了，因为null是一个特殊情况。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tyoeof <span class="literal">null</span> === <span class="string">"object"</span>;  <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>如果返回的是<code>&quot;null&quot;</code>, 也许会更好。但是这个原始的bug已经在JS里存在了20多年，而且是不会被修复的，因为有太多的现存的网站依赖于这个“BUG”,修复它的话只会带来跟多的bug。</p>
+<p>如果你想测试<code>null</code>的类型，你需要一个复合条件:</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/11/16/ydkjs-types-grammar-ch1/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/YDKJS/">YDKJS</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/04/analysis/" title="算法--设计分析" itemprop="url">算法--设计分析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-04T15:19:23.000Z" itemprop="datePublished"> 发表于 2015-11-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>[31,-41,59,26,-53,58,97,-93,-23,84] 从这组向量中算出，向量与向量相加的最大值。</p>
+<p>这里可以给出2种算法，并逐一对算法的运行速率进行验证。</p>
+<p>首先会想到的是：<br><em>1 + </em>2  ?  <em>1 + </em>2 + <em>3 ？…….
+</em>2 + <em>3  ?  </em>2 + <em>3 + </em>4 ? …….<br>……….</p>
+<p>以此类推， 找出里面最大的和。</p>
+<p>算法:<br> 1)<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> max = <span class="number">0</span>,sum, ret = [<span class="number">31</span>,<span class="number">-41</span>,<span class="number">59</span>,<span class="number">26</span>,<span class="number">-53</span>,<span class="number">58</span>,<span class="number">97</span>,<span class="number">-93</span>,<span class="number">-23</span>,<span class="number">84</span>],len = ret.length;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;len;i++)&#123;</div><div class="line">    sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = i;j&lt;len;j++)&#123;</div><div class="line">        sum += ret[j];</div><div class="line">        max = <span class="built_in">Math</span>.max(max,sum);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(max);  <span class="comment">// 187</span></div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line">此算法的时间数量级是 n的2次方</div><div class="line"></div><div class="line"></div><div class="line">2) 最快运算法:</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="keyword">var</span> ret = [<span class="number">31</span>,<span class="number">-41</span>,<span class="number">59</span>,<span class="number">26</span>,<span class="number">-53</span>,<span class="number">58</span>,<span class="number">97</span>,<span class="number">-93</span>,<span class="number">-23</span>,<span class="number">84</span>],len = ret.length,i=<span class="number">0</span>, </div><div class="line">     w = <span class="number">0</span>,max = <span class="number">0</span>,dd;</div><div class="line"><span class="keyword">for</span>(;i&lt;len;i++)&#123;</div><div class="line">    dd = ret[i];</div><div class="line">    w = <span class="built_in">Math</span>.max(w+dd,<span class="number">0</span>);</div><div class="line">    max = <span class="built_in">Math</span>.max(max,w);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此算法的时间的数量级是线性的，fastest。<br>此算法最主要的就是w这个变量，扫描整个向量，i-1个向量和一旦小于0，将重置为0，并从第i个向量又向下扫描。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/algorithm/">algorithm</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/04/data-decide-program/" title="算法--数据结构决定程序结构" itemprop="url">算法--数据结构决定程序结构</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-04T15:07:32.000Z" itemprop="datePublished"> 发表于 2015-11-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>可能大家都看到过或自己曾写过下面类似的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(i == <span class="number">1</span>) c++;</div><div class="line"><span class="keyword">if</span>(i == <span class="number">2</span>) c++;</div><div class="line">.....</div><div class="line">if(i == <span class="number">500</span>) c++;</div></pre></td></tr></table></figure></p>
+<p>虽然这些程序也能完成一些复杂的任务，但只能算是重复的运算罢了。<br>我们现在多少人应该可以立即意识到，<strong>可以用一个有500个元素的数组代替500个独立的 变量</strong>。</p>
+<p>我们来看一道程序：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(income &lt;= <span class="number">2200</span>)</div><div class="line">    tax = <span class="number">0</span>;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span>(income &lt;= <span class="number">2700</span>)</div><div class="line">    tax = <span class="number">.14</span> * (income<span class="number">-2200</span>);</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span>(income &lt;= <span class="number">3200</span>)</div><div class="line">    tax = <span class="number">70</span> + <span class="number">.15</span> * (income<span class="number">-2700</span>)</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span>(income &lt;= <span class="number">3700</span>)</div><div class="line">    tax = <span class="number">145</span> + <span class="number">.16</span> * (income - <span class="number">3200</span>)</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span>(income &lt; = <span class="number">4200</span>)</div><div class="line">   tax = <span class="number">225</span> + <span class="number">.17</span> * (income - <span class="number">3700</span>)</div><div class="line">........</div><div class="line">.........</div></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/11/04/data-decide-program/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/algorithm/">algorithm</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/04/anagrams/" title="算法--变位词" itemprop="url">算法--变位词</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-04T14:54:51.000Z" itemprop="datePublished"> 发表于 2015-11-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>给一组单词pans,pots,opt,snap,stop,stops.<br>（变位词：组成单词的各字母，进行位置的调换变成另一字母 例如：pans 和 snap）</p>
+<p>找出变位词，使得单词组分为  pans snap，opt，pots stop tops   3组变位词</p>
+<p><strong>原理：组成单词的字母不管位置怎么变，字母的数量都是一样的， 一旦将组成这些单词的字母排序后，会发现这些单词都变成一样的了。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ret = [<span class="string">'pans'</span>,<span class="string">'pots'</span>,<span class="string">'snap'</span>,<span class="string">'stop'</span>,<span class="string">'stops'</span>],i = <span class="number">0</span>,dd,dl,arr = [],o = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(len = ret.length;i&lt;len;i++)&#123;</div><div class="line">    dd = ret[i];</div><div class="line">    dl = dd.split(<span class="string">''</span>).sort().join(<span class="string">''</span>); </div><div class="line">    <span class="comment">// 将字母重新排序，生成一个key</span></div><div class="line">    o[dl] ? o[dl].push(dd) : (o[dl] = [dd]);</div><div class="line">   <span class="comment">// 将排序后具有相同key的组成一个数组</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(o);</div><div class="line"><span class="comment">/*</span></div><div class="line">o = &#123;</div><div class="line">'anps': ['pans', 'snap'],</div><div class="line">'opt' : ['opt'],</div><div class="line">'opst' : ['pots', 'stop', 'tops']</div><div class="line">&#125;</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="comment">//如果需要对输出的单词组排序的话</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> o)&#123;</div><div class="line">    arr.push(k);</div><div class="line">&#125;</div><div class="line"></div><div class="line">arr.sort();</div><div class="line"><span class="keyword">for</span>(j = <span class="number">0</span>,len = arr.length;j&lt;len;j++)&#123;</div><div class="line">    <span class="built_in">console</span>.log(o[arr[j]]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/algorithm/">algorithm</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/03/bit-mapping/" title="算法--位图法" itemprop="url">算法--位图法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-03T14:21:34.000Z" itemprop="datePublished"> 发表于 2015-11-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>1-n个整数，里面缺少了（打个比方）3个数字，请找出其中缺失的3个数字.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> n = <span class="number">10</span>,m = <span class="number">3</span>,i,</div><div class="line">      arr = [<span class="number">2</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">4</span>],    <span class="comment">//缺失的数据源</span></div><div class="line">      ret = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">11</span>),</div><div class="line">      result = [];</div><div class="line"><span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;n-m;i++)&#123;</div><div class="line">      ret[arr[i]] = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(ret);        </div><div class="line"><span class="comment">//[undefined × 1, 1, 1, undefined × 1, 1, 1, 1, undefined × 1, 1, 1, undefined × 1] </span></div><div class="line"></div><div class="line"><span class="keyword">for</span>(i = <span class="number">0</span>,len = ret.length;i&lt;len;i++)&#123;</div><div class="line">     !ret[i] &amp;&amp; result.push(i);</div><div class="line">&#125;</div><div class="line">result.shift(<span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(result);       <span class="comment">//[3,7,10]</span></div></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/11/03/bit-mapping/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/algorithm/">algorithm</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/28/My-New-Home/" title="Welcome" itemprop="url">Welcome</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-10-28T03:40:45.000Z" itemprop="datePublished"> 发表于 2015-10-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Welcome-to-new-home"><a href="#Welcome-to-new-home" class="headerlink" title="Welcome to new home :)"></a>Welcome to new home :)</h1><p>Have fan with hexo and github page.</p>
+<p>Thanks for hexo and github.</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Life/">Life</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+        <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/huiop368" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://plus.google.com/117810512905299243903?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:negativemh@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Peng">Peng</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('aside-min')
+    setTimeout(function(){
+        a.css('display', 'none');
+        o.css('display', 'block');
+    }, 5e2);
+  });
+  o.click(function(){
+    o.css('display', 'none');
+    a.css('display', 'block');
+    setTimeout(function(){
+     a.removeClass('aside-min');
+    }, 10);
+  });
+    /*
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+    */
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
+

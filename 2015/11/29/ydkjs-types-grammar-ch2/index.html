@@ -1,0 +1,528 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>YDKJS--Types &amp; Grammar(译) | Peng`s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Peng">
+    
+
+    
+    <meta name="description" content="第二章:值数组，字符串和数字是任何语言最基本的类型，但是Javascript有一些不同的性质也许会使你又爱又恨。
+让我们来看几个内置的JS类型，探索一些怎样能够跟好的正确理解他们的行为。
+数组与其他强类型语言相比，Javascript的arrays可以包含任意类型的值，无论是字符串，数字，对象，甚至是数组本身。
+12345var a = [ 1, &quot;2&quot;, [3] ];a.length;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YDKJS--Types & Grammar(译)">
+<meta property="og:url" content="http://yoursite.com/2015/11/29/ydkjs-types-grammar-ch2/index.html">
+<meta property="og:site_name" content="Peng`s Blog">
+<meta property="og:description" content="第二章:值数组，字符串和数字是任何语言最基本的类型，但是Javascript有一些不同的性质也许会使你又爱又恨。
+让我们来看几个内置的JS类型，探索一些怎样能够跟好的正确理解他们的行为。
+数组与其他强类型语言相比，Javascript的arrays可以包含任意类型的值，无论是字符串，数字，对象，甚至是数组本身。
+12345var a = [ 1, &quot;2&quot;, [3] ];a.length;">
+<meta property="og:updated_time" content="2017-01-08T14:45:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YDKJS--Types & Grammar(译)">
+<meta name="twitter:description" content="第二章:值数组，字符串和数字是任何语言最基本的类型，但是Javascript有一些不同的性质也许会使你又爱又恨。
+让我们来看几个内置的JS类型，探索一些怎样能够跟好的正确理解他们的行为。
+数组与其他强类型语言相比，Javascript的arrays可以包含任意类型的值，无论是字符串，数字，对象，甚至是数组本身。
+12345var a = [ 1, &quot;2&quot;, [3] ];a.length;">
+<link rel="publisher" href="117810512905299243903">
+
+    
+    
+    <link rel="icon" href="/img/favicon_1.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/head.jpg" alt="Peng`s Blog" title="Peng`s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Peng`s Blog">Peng`s Blog</a></h1>
+				<h2 class="blog-motto">Life &amp; Code</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-值"><span class="toc-number">1.</span> <span class="toc-text">第二章:值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">1.1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类数组"><span class="toc-number">1.2.</span> <span class="toc-text">类数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-number">1.3.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字"><span class="toc-number">1.4.</span> <span class="toc-text">数字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Placeholder"><span class="toc-number">1.4.1.</span> <span class="toc-text">Placeholder</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊值"><span class="toc-number">1.5.</span> <span class="toc-text">特殊值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#空值"><span class="toc-number">1.5.1.</span> <span class="toc-text">空值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.2.</span> <span class="toc-text">undefined</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Void-操作符"><span class="toc-number">1.6.</span> <span class="toc-text">Void 操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊的数字"><span class="toc-number">1.7.</span> <span class="toc-text">特殊的数字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不是数字"><span class="toc-number">1.8.</span> <span class="toc-text">不是数字</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/algorithm/" title="algorithm">algorithm<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/YDKJS/" title="YDKJS">YDKJS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/29/ydkjs-types-grammar-ch2/" title="YDKJS--Types &amp; Grammar(译)" itemprop="url">YDKJS--Types &amp; Grammar(译)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-29T13:25:42.000Z" itemprop="datePublished"> 发表于 2015-11-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-值"><span class="toc-number">1.</span> <span class="toc-text">第二章:值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-number">1.1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类数组"><span class="toc-number">1.2.</span> <span class="toc-text">类数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-number">1.3.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字"><span class="toc-number">1.4.</span> <span class="toc-text">数字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Placeholder"><span class="toc-number">1.4.1.</span> <span class="toc-text">Placeholder</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊值"><span class="toc-number">1.5.</span> <span class="toc-text">特殊值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#空值"><span class="toc-number">1.5.1.</span> <span class="toc-text">空值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.2.</span> <span class="toc-text">undefined</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Void-操作符"><span class="toc-number">1.6.</span> <span class="toc-text">Void 操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊的数字"><span class="toc-number">1.7.</span> <span class="toc-text">特殊的数字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不是数字"><span class="toc-number">1.8.</span> <span class="toc-text">不是数字</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="第二章-值"><a href="#第二章-值" class="headerlink" title="第二章:值"></a>第二章:值</h2><p>数组，字符串和数字是任何语言最基本的类型，但是Javascript有一些不同的性质也许会使你又爱又恨。</p>
+<p>让我们来看几个内置的JS类型，探索一些怎样能够跟好的正确理解他们的行为。</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>与其他强类型语言相比，Javascript的<code>arrays</code>可以包含任意类型的值，无论是字符串，数字，对象，甚至是数组本身。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [ <span class="number">1</span>, <span class="string">"2"</span>, [<span class="number">3</span>] ];</div><div class="line"></div><div class="line">a.length;       <span class="comment">// 3</span></div><div class="line">a[<span class="number">0</span>] === <span class="number">1</span>;     <span class="comment">// true</span></div><div class="line">a[<span class="number">2</span>][<span class="number">0</span>] === <span class="number">3</span>;  <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>你不需要预先设置数组的size, 你可以仅仅声明他们并且增加值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [ ];</div><div class="line"></div><div class="line">a.length;   <span class="comment">// 0</span></div><div class="line"></div><div class="line">a[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">a[<span class="number">1</span>] = <span class="string">"2"</span>;</div><div class="line">a[<span class="number">2</span>] = [ <span class="number">3</span> ];</div><div class="line"></div><div class="line">a.length;   <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>Warning</strong> : 用<code>delete</code>操作符运算<code>array</code>时，会从数组中移除一个位置, 但是即使你将最后一个元素移除了，数组也不会更新<code>length</code>属性。</p>
+<p>创建“稀”数组的时候一定要小心(创建了空的或丢掉了位置)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [ ];</div><div class="line"></div><div class="line">a[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line"><span class="comment">// no `a[1]` slot set here</span></div><div class="line">a[<span class="number">2</span>] = [ <span class="number">3</span> ];</div><div class="line"></div><div class="line">a[<span class="number">1</span>];       <span class="comment">// undefined</span></div><div class="line"></div><div class="line">a.length;   <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>这个时候空位置的值是<code>undefined</code>, 但是这个与<code>a[1] = undefined</code>还是不一样的。</p>
+<p><code>array</code>是数字索引，但是奇怪的事情是它同样也是对象,能够有字符串关键字(但是他们是不计算在数组的<code>length</code>里)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [ ];</div><div class="line"></div><div class="line">a[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">a[<span class="string">"foobar"</span>] = <span class="number">2</span>;</div><div class="line"></div><div class="line">a.length;       <span class="comment">// 1</span></div><div class="line">a[<span class="string">"foobar"</span>];    <span class="comment">// 2</span></div><div class="line">a.foobar;       <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>尽管如此，要小心字符串值作为属性名，当这个字符串可以转换成<code>number</code>时，它会试图用数字索引代替字符串属性名。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [ ];</div><div class="line"></div><div class="line">a[<span class="string">"13"</span>] = <span class="number">42</span>;</div><div class="line"></div><div class="line">a.length; <span class="comment">// 14</span></div></pre></td></tr></table></figure>
+<p>一般来说，用数组来存储字符串属性名是不太建议的。 用<code>Object</code>来代替这种做法，<code>array</code>就严格的保存数字索引值。</p>
+<h3 id="类数组"><a href="#类数组" class="headerlink" title="类数组"></a>类数组</h3><p>肯定遇到过几次需要将类数组转换成真正的数组，这样你就能够调用数组的方法(indexOf, concat, forEach, etc…)</p>
+<p>例如Dom集合就是类数组，而不是真正的数组。另一个例子就是function中的agument对象, 我们可能都会在某种场景下将这两种类数组转换成真实的数组。</p>
+<p>一个非常公共和方便都做法就是用<code>slice(..)</code>方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> arr = <span class="built_in">Array</span>.prototype.slice.call( <span class="built_in">arguments</span> );</div><div class="line">    arr.push( <span class="string">"bam"</span> );</div><div class="line">    <span class="built_in">console</span>.log( arr );</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo( <span class="string">"bar"</span>, <span class="string">"baz"</span> ); <span class="comment">// ["bar","baz","bam"]</span></div></pre></td></tr></table></figure>
+<p>像上面的代码片段提到的，如果<code>slice</code>方法不带参数的话，将会重新克隆数组。</p>
+<p>在ES6里，有个内置的方法<code>Array.from(..)</code>是用来做同样事情的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">var arr = <span class="built_in">Array</span>.from( <span class="built_in">arguments</span> );</div><div class="line">...</div></pre></td></tr></table></figure>
+<p><strong>Note:</strong> <code>Array.from(..)</code>还有一些其他强大的功能，将会在后续章节提到。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>这里有个比较通常的说法，字符串有着数组的特性。意识到Javascript中字符串不是真正的和数组特性一样是非常重要的，他们仅仅是表面上又点相似而已。</p>
+<p>例如：让我们考虑下这两个值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="string">"foo"</span>;</div><div class="line"><span class="keyword">var</span> b = [<span class="string">"f"</span>,<span class="string">"o"</span>,<span class="string">"o"</span>];</div></pre></td></tr></table></figure>
+<p>字符串与数组及类数组有一点点的相似，像上面。 他们都有一个<code>length</code>属性，一个<code>indexOf(..)</code>方法和<code>concat(..)</code>方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">a.length;                           <span class="comment">// 3</span></div><div class="line">b.length;                           <span class="comment">// 3</span></div><div class="line"></div><div class="line">a.indexOf( <span class="string">"o"</span> );                   <span class="comment">// 1</span></div><div class="line">b.indexOf( <span class="string">"o"</span> );                   <span class="comment">// 1</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> c = a.concat( <span class="string">"bar"</span> );          <span class="comment">// "foobar"</span></div><div class="line"><span class="keyword">var</span> d = b.concat( [<span class="string">"b"</span>,<span class="string">"a"</span>,<span class="string">"r"</span>] );  <span class="comment">// ["f","o","o","b","a","r"]</span></div><div class="line"></div><div class="line">a === c;                            <span class="comment">// false</span></div><div class="line">b === d;                            <span class="comment">// false</span></div><div class="line"></div><div class="line">a;                                  <span class="comment">// "foo"</span></div><div class="line">b;                                  <span class="comment">// ["f","o","o"]</span></div></pre></td></tr></table></figure>
+<p>所以，他们本质上来说都是数组性？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a[<span class="number">1</span>] = <span class="string">"O"</span>;</div><div class="line">b[<span class="number">1</span>] = <span class="string">"O"</span>;</div><div class="line"></div><div class="line">a; <span class="comment">// "foo"</span></div><div class="line">b; <span class="comment">// ["f","O","o"]</span></div></pre></td></tr></table></figure>
+<p>Javascript中<code>string</code>是不可变的，而<code>array</code>是易变的。此外，<code>a[1]</code>字符位置并不能一直有效。在IE的一些老版本中是不支持这种语法的。作为替代方案可以使用<code>a.charAt(1)</code>。</p>
+<p><code>string</code>方法都不会改变它本身，而都是return新的<code>string</code>对象，但<code>array</code>的方法都会改变数组本身。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">c = a.toUpperCase();</div><div class="line">a === c;    <span class="comment">// false</span></div><div class="line">a;          <span class="comment">// "foo"</span></div><div class="line">c;          <span class="comment">// "FOO"</span></div><div class="line"></div><div class="line">b.push( <span class="string">"!"</span> );</div><div class="line">b;          <span class="comment">// ["f","O","o","!"]</span></div></pre></td></tr></table></figure>
+<p>然而，很多<code>array</code>的方法对<code>string</code>来说都是非常有用的，不过我们可以把<code>array</code>的方法带给<code>string</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">a.join;         <span class="comment">// undefined</span></div><div class="line">a.map;          <span class="comment">// undefined</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> c = <span class="built_in">Array</span>.prototype.join.call( a, <span class="string">"-"</span> );</div><div class="line"><span class="keyword">var</span> d = <span class="built_in">Array</span>.prototype.map.call( a, <span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> v.toUpperCase() + <span class="string">"."</span>;</div><div class="line">&#125; ).join( <span class="string">""</span> );</div><div class="line"></div><div class="line">c;              <span class="comment">// "f-o-o"</span></div><div class="line">d;              <span class="comment">// "F.O.O."</span></div></pre></td></tr></table></figure>
+<p>让我们再来看一个例子:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a.reverse;      <span class="comment">// undefined</span></div><div class="line"></div><div class="line">b.reverse();    <span class="comment">// ["!","o","O","f"]</span></div><div class="line">b;              <span class="comment">// ["!","o","O","f"]</span></div></pre></td></tr></table></figure>
+<p>不幸的是，上面介绍的方法对<code>reverse</code>不适用，因为<code>string</code>是不可变的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Array</span>.prototype.reverse.call( a );</div><div class="line"><span class="comment">// still returns a String object wrapper (see Chapter 3)</span></div></pre></td></tr></table></figure>
+<p>让我们来看看<code>string</code>与<code>array</code>之间的转换。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> c = a</div><div class="line">    <span class="comment">// split `a` into an array of characters</span></div><div class="line">    .split( <span class="string">""</span> )</div><div class="line">    <span class="comment">// reverse the array of characters</span></div><div class="line">    .reverse()</div><div class="line">    <span class="comment">// join the array of characters back to a string</span></div><div class="line">    .join( <span class="string">""</span> );</div><div class="line"></div><div class="line">c; <span class="comment">// "oof"</span></div></pre></td></tr></table></figure>
+<p><strong>Warning:</strong> 这个方法对于复杂的<code>string</code>(unicode)是不生效的。</p>
+<h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><h4 id="Placeholder"><a href="#Placeholder" class="headerlink" title="Placeholder"></a>Placeholder</h4><h3 id="特殊值"><a href="#特殊值" class="headerlink" title="特殊值"></a>特殊值</h3><p>这里有几个比较特别的值需要开发者注意的, 并且适当地使用。</p>
+<h4 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h4><p>对于<code>undefined</code>类型来说，这里只有唯一的一个值:<code>undefined</code>. 对于<code>null</code>类型来说，也只有唯一的一个值:<code>null</code>。</p>
+<p><code>undefined</code>和<code>null</code>经常被认为是空值或不存在的值. 然而一些开发者倾向于细小的差别来区分他们. 例如:</p>
+<ul>
+<li><code>null</code>是一个空值</li>
+<li><code>undefined</code>是一个丢失的值</li>
+</ul>
+<p>或者</p>
+<ul>
+<li><code>undefined</code>还没有值</li>
+<li><code>null</code>有值，但这个值什么都不是</li>
+</ul>
+<p>Regardless of how you choose to “define” and use these two values, null is a special keyword, not an identifier, and thus you cannot treat it as a variable to assign to (why would you!?). However, undefined is (unfortunately) an identifier. Uh oh.<br>(怎么翻都觉得不太对)</p>
+<h4 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h4><p>在non-<code>strict</code>的模式下，给global的<code>undefined</code>赋值是可能的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="literal">undefined</span> = <span class="number">2</span>; <span class="comment">// really bad idea!</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">foo();</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">    "use strict"</span>;</div><div class="line">    <span class="literal">undefined</span> = <span class="number">2</span>; <span class="comment">// TypeError!</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">foo();</div></pre></td></tr></table></figure>
+<p>在non-<code>strict</code>和<code>strict</code>模式下, 尽管如此，你都能够创建一个局部变量<code>undefined</code>. 但是这同样是非常糟糕的.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">    "use strict"</span>;</div><div class="line">    <span class="keyword">var</span> <span class="literal">undefined</span> = <span class="number">2</span>;</div><div class="line">    <span class="built_in">console</span>.log( <span class="literal">undefined</span> ); <span class="comment">// 2</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">foo();</div></pre></td></tr></table></figure>
+<p><strong> Friends don’t let friends override <code>undefined</code> </strong> . Ever.</p>
+<h3 id="Void-操作符"><a href="#Void-操作符" class="headerlink" title="Void 操作符"></a>Void 操作符</h3><p><code>void ___</code>这表达式总是返回<code>undefined</code>, 它并不会改变现有的值，仅仅是没有任何值能够从这个表达式返回.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">42</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log( <span class="keyword">void</span> a, a ); <span class="comment">// undefined 42</span></div></pre></td></tr></table></figure>
+<p>按照惯例，为了得到<code>undefined</code>值，一般我们会用<code>void 0</code>(尽管 <code>void true</code>和一些其他的void表达式做的是同样的事情), 他们之间是没有什么特别的区别的.</p>
+<p>但是在一些情况下，<code>void</code>操作符还是比较有帮助的.</p>
+<p>例如:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// note: `APP.ready` is provided by our application</span></div><div class="line">    <span class="keyword">if</span> (!APP.ready) &#123;</div><div class="line">        <span class="comment">// try again later</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">void</span> setTimeout( doSomething, <span class="number">100</span> );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> result;</div><div class="line"></div><div class="line">    <span class="comment">// do some other stuff</span></div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// were we able to do it right away?</span></div><div class="line"><span class="keyword">if</span> (doSomething()) &#123;</div><div class="line">    <span class="comment">// handle next tasks right away</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里, <code>setTimeout(..)</code>函数返回一个数字(不同的timer标识，用来取消它), 但是我们希望<code>if</code>语句能够有个否定的值，所以用<code>void</code>执行了一下.</p>
+<p>很多开发者更喜欢把动作分开，不用<code>void</code>而达到同样的效果.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (!APP.ready) &#123;</div><div class="line">    <span class="comment">// try again later</span></div><div class="line">    setTimeout( doSomething, <span class="number">100</span> );</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一般来说，如果你发现用<code>undefined</code>替代其他值能更有帮助的话，那么用<code>void</code>操作符. 也许在你的程序里这样的情况不是非常多的，但在一些极少的情况下你一定会需要它的，它会非常有帮助的.</p>
+<h3 id="特殊的数字"><a href="#特殊的数字" class="headerlink" title="特殊的数字"></a>特殊的数字</h3><p>数字类型包含了几个特别的值，让我们详细的看看。</p>
+<h3 id="不是数字"><a href="#不是数字" class="headerlink" title="不是数字"></a>不是数字</h3><p>但两个操作数都不是<code>number</code>并进行数学运算的时候，结果会得到一个无效的<code>number</code>—<code>NaN</code>值.</p>
+<p><code>NaN</code>通常被认为“不是一个数字”, 但是将它认为是“无效的数字”也许会比”不是数字”更加精确。</p>
+<p>例如:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">2</span> / <span class="string">"foo"</span>;      <span class="comment">// NaN</span></div><div class="line"></div><div class="line"><span class="keyword">typeof</span> a === <span class="string">"number"</span>;  <span class="comment">// true</span></div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/YDKJS/">YDKJS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/11/29/ydkjs-types-grammar-ch2/" data-title="YDKJS--Types &amp; Grammar(译) | Peng`s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/23/redux-source-code-analysis/" title="Redux 源码分析(1)">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Redux 源码分析(1)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/16/ydkjs-types-grammar-ch1/"  title="YDKJS--Types &amp; Grammar(译)">
+ <strong>下一篇：</strong><br/> 
+ <span>YDKJS--Types &amp; Grammar(译)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+        <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/huiop368" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://plus.google.com/117810512905299243903?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:negativemh@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Peng">Peng</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('aside-min')
+    setTimeout(function(){
+        a.css('display', 'none');
+        o.css('display', 'block');
+    }, 5e2);
+  });
+  o.click(function(){
+    o.css('display', 'none');
+    a.css('display', 'block');
+    setTimeout(function(){
+     a.removeClass('aside-min');
+    }, 10);
+  });
+    /*
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+    */
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+    /*
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+    */
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+

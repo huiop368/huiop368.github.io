@@ -1,0 +1,455 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>算法--变位词 | Peng`s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Peng">
+    
+
+    
+    <meta name="description" content="给一组单词pans,pots,opt,snap,stop,stops.（变位词：组成单词的各字母，进行位置的调换变成另一字母 例如：pans 和 snap）
+找出变位词，使得单词组分为  pans snap，opt，pots stop tops   3组变位词
+原理：组成单词的字母不管位置怎么变，字母的数量都是一样的， 一旦将组成这些单词的字母排序后，会发现这些单词都变成一样的了。
+1234567">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法--变位词">
+<meta property="og:url" content="http://yoursite.com/2015/11/04/anagrams/index.html">
+<meta property="og:site_name" content="Peng`s Blog">
+<meta property="og:description" content="给一组单词pans,pots,opt,snap,stop,stops.（变位词：组成单词的各字母，进行位置的调换变成另一字母 例如：pans 和 snap）
+找出变位词，使得单词组分为  pans snap，opt，pots stop tops   3组变位词
+原理：组成单词的字母不管位置怎么变，字母的数量都是一样的， 一旦将组成这些单词的字母排序后，会发现这些单词都变成一样的了。
+1234567">
+<meta property="og:updated_time" content="2017-01-08T14:33:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法--变位词">
+<meta name="twitter:description" content="给一组单词pans,pots,opt,snap,stop,stops.（变位词：组成单词的各字母，进行位置的调换变成另一字母 例如：pans 和 snap）
+找出变位词，使得单词组分为  pans snap，opt，pots stop tops   3组变位词
+原理：组成单词的字母不管位置怎么变，字母的数量都是一样的， 一旦将组成这些单词的字母排序后，会发现这些单词都变成一样的了。
+1234567">
+<link rel="publisher" href="117810512905299243903">
+
+    
+    
+    <link rel="icon" href="/img/favicon_1.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/head.jpg" alt="Peng`s Blog" title="Peng`s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Peng`s Blog">Peng`s Blog</a></h1>
+				<h2 class="blog-motto">Life &amp; Code</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container" class="clearfix">
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/algorithm/" title="algorithm">algorithm<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/YDKJS/" title="YDKJS">YDKJS<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Life/" title="Life">Life<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/04/anagrams/" title="算法--变位词" itemprop="url">算法--变位词</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/117810512905299243903?rel=author" title="Peng" target="_blank" itemprop="author">Peng</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-04T14:54:51.000Z" itemprop="datePublished"> 发表于 2015-11-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>给一组单词pans,pots,opt,snap,stop,stops.<br>（变位词：组成单词的各字母，进行位置的调换变成另一字母 例如：pans 和 snap）</p>
+<p>找出变位词，使得单词组分为  pans snap，opt，pots stop tops   3组变位词</p>
+<p><strong>原理：组成单词的字母不管位置怎么变，字母的数量都是一样的， 一旦将组成这些单词的字母排序后，会发现这些单词都变成一样的了。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ret = [<span class="string">'pans'</span>,<span class="string">'pots'</span>,<span class="string">'snap'</span>,<span class="string">'stop'</span>,<span class="string">'stops'</span>],i = <span class="number">0</span>,dd,dl,arr = [],o = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(len = ret.length;i&lt;len;i++)&#123;</div><div class="line">    dd = ret[i];</div><div class="line">    dl = dd.split(<span class="string">''</span>).sort().join(<span class="string">''</span>); </div><div class="line">    <span class="comment">// 将字母重新排序，生成一个key</span></div><div class="line">    o[dl] ? o[dl].push(dd) : (o[dl] = [dd]);</div><div class="line">   <span class="comment">// 将排序后具有相同key的组成一个数组</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(o);</div><div class="line"><span class="comment">/*</span></div><div class="line">o = &#123;</div><div class="line">'anps': ['pans', 'snap'],</div><div class="line">'opt' : ['opt'],</div><div class="line">'opst' : ['pots', 'stop', 'tops']</div><div class="line">&#125;</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="comment">//如果需要对输出的单词组排序的话</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> o)&#123;</div><div class="line">    arr.push(k);</div><div class="line">&#125;</div><div class="line"></div><div class="line">arr.sort();</div><div class="line"><span class="keyword">for</span>(j = <span class="number">0</span>,len = arr.length;j&lt;len;j++)&#123;</div><div class="line">    <span class="built_in">console</span>.log(o[arr[j]]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/algorithm/">algorithm</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/11/04/anagrams/" data-title="算法--变位词 | Peng`s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/04/data-decide-program/" title="算法--数据结构决定程序结构">
+  <strong>上一篇：</strong><br/>
+  <span>
+  算法--数据结构决定程序结构</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/03/bit-mapping/"  title="算法--位图法">
+ <strong>下一篇：</strong><br/> 
+ <span>算法--位图法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+        <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/huiop368" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://plus.google.com/117810512905299243903?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:negativemh@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Peng">Peng</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('aside-min')
+    setTimeout(function(){
+        a.css('display', 'none');
+        o.css('display', 'block');
+    }, 5e2);
+  });
+  o.click(function(){
+    o.css('display', 'none');
+    a.css('display', 'block');
+    setTimeout(function(){
+     a.removeClass('aside-min');
+    }, 10);
+  });
+    /*
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+    */
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+    /*
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+    */
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
+
