@@ -113,7 +113,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/05/23/redux-source-code-analysis/" title="Redux 源码分析(1)" itemprop="url">Redux 源码分析(1)</a>
+      <a href="/2016/05/23/redux-source-code-analysis/" title="Redux 源码解析" itemprop="url">Redux 源码解析</a>
   </h1>
   <p class="article-author">By
        
@@ -126,10 +126,13 @@
 </header>
     <div class="article-content">
         
-        <h2 id="Placeholder"><a href="#Placeholder" class="headerlink" title="Placeholder"></a>Placeholder</h2>
+        <p>我们先从一个简单的单纯的Redux开始吧 （这里认为你对redux已经有部分了解）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span></div><div class="line"></div><div class="line"><span class="comment">// 定义reducer函数，处理数据变化</span></div><div class="line"><span class="keyword">const</span> counter = <span class="function">(<span class="params">state = <span class="number">0</span>, action</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">switch</span> (action.type) &#123;</div><div class="line">      <span class="keyword">case</span> <span class="string">'INCREMENT'</span>:</div><div class="line">        <span class="keyword">return</span> state + <span class="number">1</span></div><div class="line">      <span class="keyword">case</span> <span class="string">'DECREMENT'</span>:</div><div class="line">        <span class="keyword">return</span> state - <span class="number">1</span></div><div class="line">      <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">return</span> state</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 创建一个store对象</span></div><div class="line"><span class="keyword">let</span> store = createStore(counter)</div><div class="line"></div><div class="line"><span class="comment">// 监听触发action时需要响应的事件</span></div><div class="line">store.subscribe(<span class="function"><span class="params">()</span> =&gt;</span></div><div class="line">  <span class="built_in">console</span>.log(store.getState())</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment">// 触发action, 即click一个button时你想触发什么action</span></div><div class="line"><span class="comment">// 页面初始化时，你想触发什么action</span></div><div class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">'INCREMENT'</span> &#125;)</div><div class="line"><span class="comment">// 1</span></div><div class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">'INCREMENT'</span> &#125;)</div><div class="line"><span class="comment">// 2</span></div><div class="line">store.dispatch(&#123; <span class="attr">type</span>: <span class="string">'DECREMENT'</span> &#125;)</div><div class="line"><span class="comment">// 1</span></div></pre></td></tr></table></figure>
         
         
         <p class="article-more-link">
+          
+            <a href="/2016/05/23/redux-source-code-analysis/#more">Read More</a>
           
        </p>
     </div>
